@@ -1,0 +1,71 @@
+services:
+  # Single-container mode (4 ranks on 1 machine)
+  mpi:
+    build:
+      context: .
+    image: pdc-mpi:latest
+    container_name: pdc-mpi-single
+    environment:
+      OMP_NUM_THREADS: 4
+    shm_size: "1g"
+    command: ["mpirun", "--allow-run-as-root", "-np", "4", "/app/milestone3_mpi", "--mode=replicate", "--points=10000000", "--omp-threads=4"]
+
+  # Multi-container cluster mode (4 machines)
+  rank0:
+    build:
+      context: .
+    image: pdc-mpi:latest
+    container_name: pdc-rank0
+    hostname: rank0
+    environment:
+      OMP_NUM_THREADS: 4
+      RANK: 0
+    networks:
+      cluster:
+        ipv4_address: 172.25.0.2
+
+  rank1:
+    build:
+      context: .
+    image: pdc-mpi:latest
+    container_name: pdc-rank1
+    hostname: rank1
+    environment:
+      OMP_NUM_THREADS: 4
+      RANK: 1
+    networks:
+      cluster:
+        ipv4_address: 172.25.0.3
+
+  rank2:
+    build:
+      context: .
+    image: pdc-mpi:latest
+    container_name: pdc-rank2
+    hostname: rank2
+    environment:
+      OMP_NUM_THREADS: 4
+      RANK: 2
+    networks:
+      cluster:
+        ipv4_address: 172.25.0.4
+
+  rank3:
+    build:
+      context: .
+    image: pdc-mpi:latest
+    container_name: pdc-rank3
+    hostname: rank3
+    environment:
+      OMP_NUM_THREADS: 4
+      RANK: 3
+    networks:
+      cluster:
+        ipv4_address: 172.25.0.5
+
+networks:
+  cluster:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.25.0.0/16

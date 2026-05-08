@@ -1,0 +1,7 @@
+.git
+.vscode
+*.exe
+*.o
+*.log
+*.tmp
+__pycache__
