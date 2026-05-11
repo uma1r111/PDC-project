@@ -252,18 +252,6 @@ docker compose logs -f rank0
 
 ---
 
-## Contact & Attribution
-
-**Student:** Saad Thaplawala (ID: 27172)
-
-**Assigned Milestones:**
-- Milestone 2: Multithreaded point classification via OpenMP
-- Milestone 3: MPI result aggregation and distributed execution
-
-**Course:** Parallel & Distributed Computing (PDC)
-
----
-
 ## Summary
 
 This project demonstrates a complete, professional-quality implementation of parallel spatial algorithms at scale. Each milestone builds on the previous, progressing from sequential correctness through shared-memory parallelism to distributed execution. The inclusion of Docker containerization and multi-node clustering simulation makes this a practical learning resource for distributed systems.
